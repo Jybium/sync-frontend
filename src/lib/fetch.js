@@ -8,7 +8,7 @@ import notifySuccess from "../utils/notifySuccess";
 
 
 
-export function fetchData(url, options) {
+export function usefetchData(url, options) {
   let isFetching = false;
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);

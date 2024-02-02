@@ -28,9 +28,7 @@ const Form = () => {
       setCookie(response.access_token)
       localStorage.setItem("user", JSON.stringify(response.user))
       setUser(response.user)
-      console.log(data);
-      console.log(response)
-      console.log(response.access_token, response.user)
+      
       if(response) router.push("/dashboard")
     }catch(e){
       const error = e 

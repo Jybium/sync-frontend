@@ -25,8 +25,7 @@ const Form = () => {
     try {
       const result = await axios.post("http://localhost:5000/auth/signup", data);
       const response = result.data;
-      console.log(data);
-      console.log(response);
+      
       if (response) route.push("/auth/login");
 
       notifySuccess(response.msg)
