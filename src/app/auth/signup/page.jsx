@@ -8,7 +8,7 @@ const page = () => {
   return (
     <main>
       <div className="flex justify-between items-center my-5 ">
-        <div className="">
+        <div className="hidden sm:grid">
           <Logo />
           <Image src={View} alt="Login image" className="block w-full object-cover" />
         </div>
