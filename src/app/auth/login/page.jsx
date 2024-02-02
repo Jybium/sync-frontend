@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./Form";
 import Image from "next/image";
 import View from "../../../../public/auth-page/auth.png";
-import Logo from "@/app/components/Logo";
+import Logo from "../../components/Logo";
 
 const page = () => {
   return (

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { getCookie } from "@/utils/cookies";
+import { getCookie } from "../utils/cookies";
 import notifyError from "../utils/notifyError";
 import notifySuccess from "../utils/notifySuccess";
 

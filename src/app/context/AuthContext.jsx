@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect} from "react";
 import { useFetchWithInterceptors } from "../../lib/fetch";
-import { setCookie } from "@/utils/cookies";
+import { setCookie } from "../../utils/cookies";
 
 export const AuthContext = createContext({})
 

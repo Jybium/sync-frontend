@@ -1,10 +1,11 @@
 "use client"
 
-import { PasswordLogin, Text } from '@/app/components/Input'
+import { PasswordLogin, Text } from '../../components/Input'
 import Link from "next/link"
 import Image from "next/image"
 import React, { useState } from 'react'
-import Button from '@/app/components/Button'
+import { useRouter } from 'next/navigation'
+import Button from '../../components/Button'
 import {useForm} from "react-hook-form"
 import axios, { AxiosError } from "axios"
 import { fetchData } from '../../../lib/fetch'
@@ -15,6 +16,7 @@ import { useAuth } from '../../context/AuthContext'
 
 const Form = () => {
   const {user, setUser} = useAuth()
+  const router = useRouter()
   const {register, handleSubmit, watch, formState:{errors}} = useForm()
   
   const Submit = async (data) =>{
@@ -23,11 +25,13 @@ const Form = () => {
 
       const result = await axios.post("http://localhost:5000/auth/login", data);
       const response = result.data
-      setUser(response.user)
       setCookie(response.access_token)
+      localStorage.setItem("user", JSON.stringify(response.user))
+      setUser(response.user)
       console.log(data);
       console.log(response)
       console.log(response.access_token, response.user)
+      if(response) router.push("/dashboard")
     }catch(e){
       const error = e 
       console.log(error)

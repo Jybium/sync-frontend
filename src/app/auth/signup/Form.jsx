@@ -1,13 +1,18 @@
 "use client";
 
-import { Password, Text, Select } from "@/app/components/Input";
+import { Password, Text, Select } from "../../components/Input";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import Button from "@/app/components/Button";
+import { useRouter } from "next/navigation";
+import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
+import axios from "axios"
+import notifySuccess from "../../../utils/notifySuccess";
+import notifyError from "../../../utils/notifyError";
 
 const Form = () => {
+  const route = useRouter();
   const {
     register,
     handleSubmit,
@@ -15,9 +20,23 @@ const Form = () => {
     formState: { errors },
   } = useForm();
 
-  const Submit = (data) => {
+  const Submit = async (data) => {
     console.log(data);
+    try {
+      const result = await axios.post("http://localhost:5000/auth/signup", data);
+      const response = result.data;
+      console.log(data);
+      console.log(response);
+      if (response) route.push("/auth/login");
+
+      notifySuccess(response.msg)
+    } catch (e) {
+      const error = e;
+      console.log(error);
+      notifyError("There is trouble trying to sign you up!")
+    }
   };
+
   return (
     <section className="grid gap-3 w-1/2">
       <div className="font-bold text-2xl text-center">
@@ -41,6 +60,15 @@ const Form = () => {
               type="text"
               classname=""
               name="lastName"
+              required={true}
+              register={register}
+              error={errors}
+            />
+            <Text
+              placeholder="Email Address"
+              type="email"
+              classname=""
+              name="emailAddress"
               required={true}
               register={register}
               error={errors}
